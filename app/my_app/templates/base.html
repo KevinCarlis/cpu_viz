@@ -1,0 +1,21 @@
+<!doctype html>
+<head>
+    <title>{% block title %}{% endblock %} - CPU_Viz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="utf-8">
+    <meta name="description" contect="CPU Visualization Web Site">
+    <meta name="keywords" contect="HTML,CSS,Flask,CPU,Docker">
+    <meta name="author" contect="Kevin Carlis, Lorenzo Rodriguez-Cruz">
+    <meta name="viewport" contect="width=device-width, intial-scale=1.0">
+</head>
+<nav>
+</nav>
+<section class="content">
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+    {% endfor %}
+    {% block content %}{% endblock %}
+</section>

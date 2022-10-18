@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+		<title>Person Resume</title>
+		<meta charset="utf-8">
+		<meta name="description" content="IS40 Project 2">
+		<meta name="keywords" content="HTML,CSS">
+		<meta name="author" content="Kevin Carlis">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+		<header>
+			<h1>Firstname Lastname</h1>
+			<p class="accent">skill1 & skill2 professional</p>
+		</header>
+		<ul class="sitenavigation">
+				<li><a href="home.html">Intro</a></li>
+				<li><a href="experience.html">Experience</a></li>
+				<li><a href="skills.html">Skills</a></li>
+				<li><a href="motivation.html">Motivation</a></li>
+				<li><a href="contact.html">Contact</a></li>
+		</ul>
+		<form>
+		<form>
+			<fieldset>
+				<fieldset class="contactinfo">
+					<legend>Contact</legend>
+					<label for="nameinput">
+						Name
+						<input type="text" name="name" id="nameinput" placeholder="Firstname Lastname">
+					</label>
+					<label for="emailinput">
+						Email
+						<input type="email" name="email" id="emailinput" placeholder="email@website.extension">
+					</label>
+					<label for="phoneinput">
+						Phone Number
+						<input type="tel" name="phone" id="phoneinput" placeholder="555-555-5555">
+					</label>
+				</fieldset>
+				<fieldset class="contacttype">
+					<legend>How to reach you</legend>
+					<label for="phone">
+						<input type="radio" name="reach" id="phone"
+						value="Phone" checked>
+						Phone
+					</label>
+					<label for="email">
+						<input type="radio" name="reach" id="email"
+						value="email">
+						Email
+					</label>
+				</fieldset>
+				<fieldset class="positiontype">
+					<legend>Position Duration</legend>
+					<label for="fulltime">
+						<input type="radio" name="dur" id="fulltime"
+						value="Full" checked>
+						Full-time
+					</label>
+					<label for="parttime">
+						<input type="radio" name="dur" id="parttime"
+						value="Part" checked>
+						Part-time
+					</label>
+					<label for="contract">
+						<input type="radio" name="dur" id="contract"
+						value="Contract" checked>
+						Contract
+					</label>
+				</fieldset>
+				<fieldset class="jobtype">
+					<legend>Job Type</legend>
+					<label for="coding">
+						<input type="checkbox" id ="coding" value="Coding" name="jobtype">
+						Coding
+					</label>
+					<label for="data">
+						<input type="checkbox" id ="data" value="Data" name="jobtype">
+						Data
+					</label>
+					<label for="repair">
+						<input type="checkbox" id ="repair" value="Repair" name="jobtype">
+						Computer Repair
+					</label>
+					<label for="web">
+						<input type="checkbox" id ="web" value="Web" name="jobtype">
+						Web Development
+					</label>
+					<label for="management">
+						<input type="checkbox" id ="management" value="Management" name="jobtype">
+						Management
+					</label>
+					<label for="dog">
+						<input type="checkbox" id ="dog" value="Dog" name="jobtype">
+						Dog Training
+					</label>
+				</fieldset>
+				<fieldset class="start">
+					<legend>Scheduling</legend>
+					<p style="float: left; width: 9.2em; padding: 0;">Start Date</p>
+					<div class="date-picker">
+						<label for="start-month">Start Month</label>
+						<select id="start-month" name="start-month">
+							<option value="01">January</option>
+							<option value="02">February</option>
+							<option value="03">March</option>
+							<option value="04">April</option>
+							<option value="05">May</option>
+							<option value="06">June</option>
+							<option value="07">July</option>
+							<option value="08">August</option>
+							<option value="09">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						</select>
+						<label for="start-day">Start Day</label>
+						<select id="start-day" name="start-day">
+							<option value="01">01</option>
+							<option value="02">02</option>
+							<option value="03">03</option>
+							<option value="04">04</option>
+							<option value="05">05</option>
+							<option value="06">06</option>
+							<option value="07">07</option>
+							<option value="08">08</option>
+							<option value="09">09</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+							<option value="25">25</option>
+							<option value="26">26</option>
+							<option value="27">27</option>
+							<option value="28">28</option>
+							<option value="29">29</option>
+							<option value="30">30</option>
+							<option value="31">31</option>
+						</select>
+				</fieldset>
+				<fieldset class="jobdetails">
+					<legend>Position Details</legend>
+					<label for="details">Additional Details
+						<textarea name="details" id="details" rows="4" cols="80"></textarea>
+					</label>
+					</fieldset>
+				<form action="results.html">
+				<fieldset class="submitbutton">
+					<input type="submit" id="submit" value="Submit">
+				</fieldset>
+			</fieldset>
+		</form>
+  </body>
+</html>
