@@ -93,4 +93,4 @@ ENV/
 app/instance/
 
 # mysql local
-employees.sql
+data/db/*
