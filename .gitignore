@@ -91,6 +91,3 @@ ENV/
 
 #Flask instance
 app/instance/
-
-# mysql local
-data/db/*
