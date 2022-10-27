@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}CPU Visualizer{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form id="selectionMenu" method="POST">
+        <label for="ins">Instruction</label>
+        <select name="instruction" id="ins">
+            <!-- <option selected disabled>Instruction</option> -->
+            <option value="move">MOV</option>
+            <option value="add">ADD</option>
+            <option value="subtract">SUB</option>
+            <option value="multiply">MUL</option>
+        </select>
+        <label for="rd">Destination</label>
+        <select name="destination" id="rd">
+            {% for row in registers %}
+            <option value={{ row[0] }}>{{ row[0] }}</option>
+            {% endfor %}
+        </select>
+        <label for="rm">Operand1</label>
+        <select name="operand1" id="rm">
+            {% for row in registers %}
+            <option value={{ row[0] }}>{{ row[0] }}</option>
+            {% endfor %}
+        </select>
+        <label for="rn">Operand2</label>
+        <select name="destination" id="rn">
+            <option value="immediate">Immediate</option>
+            {% for row in registers %}
+            <option value={{ row[0] }}>{{ row[0] }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <div class="w3-sidebar w3-bar-block" style="width:10%">
+        <table>
+            {% for row in registers %}
+            <tr>
+                <th>{{ row[0] }}</th>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
