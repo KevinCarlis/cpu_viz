@@ -2,18 +2,11 @@ h1, table {
     border: 0;
     padding: 0;
     margin: 0;
-}
-
-h1 {
     text-align: center;
-}
-
-.content {
 }
 
 table {
     margin: 0 auto;
-    text-align: center;
     border-collapse: collapse;
 }
 
@@ -25,6 +18,28 @@ td {
     border: 1px solid;
     padding: 0.4em 0.4rem;
 }
+caption {
+    font-size: 1.5em;
+}
+
 label {
     display: flex;
+}
+
+.selector {
+    display: inline-block;
+    margin: 0.4em 1em 3em 1em;
+}
+#rmdiv {
+    display: none;
+}
+
+.sidebar {
+    position: fixed;
+    width: 120px;
+}
+
+#right {
+    width: 200px;
+    right: 0;
 }

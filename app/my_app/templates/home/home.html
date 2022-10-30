@@ -1,47 +1,75 @@
 {% extends 'base.html' %}
 
+<head>
+    <script src="{{ url_for('static', filename='selection.js') }}"></script>
+</head>
+
 {% block header %}
     <h1>{% block title %}CPU Visualizer{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-    <form id="selectionMenu" method="POST">
-        <label for="ins">Instruction</label>
-        <select name="instruction" id="ins">
-            <!-- <option selected disabled>Instruction</option> -->
-            <option value="move">MOV</option>
-            <option value="add">ADD</option>
-            <option value="subtract">SUB</option>
-            <option value="multiply">MUL</option>
-        </select>
-        <label for="rd">Destination</label>
-        <select name="destination" id="rd">
-            {% for row in registers %}
-            <option value={{ row[0] }}>{{ row[0] }}</option>
-            {% endfor %}
-        </select>
-        <label for="rm">Operand1</label>
-        <select name="operand1" id="rm">
-            {% for row in registers %}
-            <option value={{ row[0] }}>{{ row[0] }}</option>
-            {% endfor %}
-        </select>
-        <label for="rn">Operand2</label>
-        <select name="destination" id="rn">
-            <option value="immediate">Immediate</option>
-            {% for row in registers %}
-            <option value={{ row[0] }}>{{ row[0] }}</option>
-            {% endfor %}
-        </select>
-    </form>
-    <div class="w3-sidebar w3-bar-block" style="width:10%">
+    <div class="menu">
+        <form id="selectionMenu" method="POST">
+            <div class="selector" id="insdiv">
+                <label for="ins">Instruction</label>
+                <select name="ins" id="ins">
+                    <option value="move">MOV</option>
+                    <option value="add">ADD</option>
+                    <option value="subtract">SUB</option>
+                    <option value="multiply">MUL</option>
+                </select>
+            </div>
+            <div class="selector" id="rddiv">
+                <label for="rd" class="rd">Destination</label>
+                <select name="rd" class="rd" id="rd">
+                    {% for pair in registers %}
+                        <option value={{ pair[0] }}>{{ pair[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="selector" id="rmdiv">
+                <label for="rm" class="rm">Operand1</label>
+                <select name="rm" class="rm" id="rm">
+                    {% for pair in registers %}
+                        <option value={{ pair[0] }}>{{ pair[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="selector" id="rndiv">
+                <label for="rn" id="rnlabel">Operand1</label>
+                <select name="rn" id="rn">
+                    <option value="immediate">Immediate</option>
+                        {% for pair in registers %}
+                    <option value={{ pair[0] }}>{{ pair[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="selector" id="immdiv">
+                <label for="imm">Immediate</label>
+                <input type="number" min="-128" max="127" name="imm" id="imm" 
+                value="0">
+            </div>
+            <div class="selector">
+                <input type="submit" value="Encode">
+            </div>
+        </form>
+    </div>
+    <div class="sidebar" id="left">
         <table>
-            {% for row in registers %}
+            {% for pair in registers %}
             <tr>
-                <th>{{ row[0] }}</th>
-                <td>{{ row[1] }}</td>
+                <th>{{ pair[0] }}</th>
+                <td>{{ pair[1] }}</td>
             </tr>
             {% endfor %}
         </table>
     </div>
+    <div class="sidebar" id="right">
+        <table>
+            <caption>Instructions</caption>
+        </table>
+    </div>
+
+    <script src="{{ url_for('static', filename='iselect.js') }}"></script>
 {% endblock %}
