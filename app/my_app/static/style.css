@@ -5,13 +5,18 @@ h1, table {
     text-align: center;
 }
 
+.menu {
+    display: flex;
+    justify-content: center;
+}
+
 .sidebar {
     position: fixed;
     width: 120px;
 }
 
 #right {
-    width: 200px;
+    width: 300px;
     right: 0;
 }
 
@@ -50,4 +55,16 @@ label {
 
 .immselector {
     width: 5em;
+}
+
+.bin {
+    display: table-cell;
+}
+
+.hex {
+    display: none;
+}
+
+.dec {
+    display: none;
 }

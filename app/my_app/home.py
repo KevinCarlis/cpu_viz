@@ -3,16 +3,17 @@ from my_app import regclass
 
 bp = Blueprint("home", __name__)
 registers = regclass.Registers()
+instructions = regclass.Instructions()
 
 
 @bp.route('/')
 def home():
-    registers.format('x')
-    session['registers'] = registers.printable
+    session['registers'] = registers()
     return render_template(
         'home/home.html',
-        names=registers.names,
-        pairs=registers.printable
+        names=registers.get_names(),
+        pairs=registers(),
+        instructions=instructions()
     )
 
 
@@ -23,6 +24,6 @@ def result():
         pairs = session.get('registers', None)
         return render_template(
             'home/home.html',
-            names=registers.names,
+            names=registers.get_names(),
             pairs=pairs
         )

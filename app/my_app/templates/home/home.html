@@ -66,42 +66,30 @@
 
 
     <div class="sidebar" id="left">
-        <label for="binary">
-            <input type="radio" name="registers" id="binarybutton"
+        <form name="radios">
+            <label for="binary">
+            <input type="radio" name="regbutt" id="binarybutton"
             value="b" checked>
-            Binary
-        </label>
-        <label for="hexadecimal">
-            <input type="radio" name="registers" id="hexbutton"
+                Binary
+            </label>
+            <label for="hexadecimal">
+            <input type="radio" name="regbutt" id="hexbutton"
             value="x">
-            Hexadecimal
-        </label>
-        <label for="decimal">
-            <input type="radio" name="registers" id="decbutton"
+                Hexadecimal
+            </label>
+            <label for="decimal">
+            <input type="radio" name="regbutt" id="decbutton"
             value="d">
-            Decimal
-        </label>
-        <table id="bin">
-            {% for pair in binaries %}
+                Decimal
+            </label>
+        </form>
+        <table id="registers">
+            {% for pair in pairs %}
             <tr>
                 <th>{{ pair[0] }}</th>
-                <td>{{ pair[1] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <table id="hex">
-            {% for pair in hexes %}
-            <tr>
-                <th>{{ pair[0] }}</th>
-                <td>{{ pair[1] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <table id="dec">
-            {% for pair in decies %}
-            <tr>
-                <th>{{ pair[0] }}</th>
-                <td>{{ pair[1] }}</td>
+                <td class="bin">{{ pair[1] }}</td>
+                <td class="hex">{{ pair[2] }}</td>
+                <td class="dec">{{ pair[3] }}</td>
             </tr>
             {% endfor %}
         </table>
@@ -111,6 +99,14 @@
     <div class="sidebar" id="right">
         <table>
             <caption>Instructions</caption>
+            {% for row in instructions %}
+                <tr>
+                    <th>{{ row[0] }}</th>
+                    {% for text in row[1:] %}
+                        <td>{{ text }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
         </table>
     </div>
 
