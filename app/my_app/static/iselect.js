@@ -11,7 +11,9 @@ rnel.addEventListener("change", function() {
 var immel = document.getElementById("rn");
 immel.addEventListener("change", function() {
     document.querySelector('#immdiv').style.display = 'inline-block';
+    document.querySelector('#immdivs').style.display = 'inline-block';
     if (this.value !== "immediate") {
         document.querySelector('#immdiv').style.display = 'none';
+        document.querySelector('#immdivs').style.display = 'none';
     }
 });

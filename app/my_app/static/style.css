@@ -5,6 +5,16 @@ h1, table {
     text-align: center;
 }
 
+.sidebar {
+    position: fixed;
+    width: 120px;
+}
+
+#right {
+    width: 200px;
+    right: 0;
+}
+
 table {
     margin: 0 auto;
     border-collapse: collapse;
@@ -26,6 +36,10 @@ label {
     display: flex;
 }
 
+.imm {
+    display: inline-block;
+}
+
 .selector {
     display: inline-block;
     margin: 0.4em 1em 3em 1em;
@@ -34,12 +48,6 @@ label {
     display: none;
 }
 
-.sidebar {
-    position: fixed;
-    width: 120px;
-}
-
-#right {
-    width: 200px;
-    right: 0;
+.immselector {
+    width: 5em;
 }
