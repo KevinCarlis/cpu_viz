@@ -7,42 +7,72 @@ h1, table {
 
 .menu {
     display: flex;
-    justify-content: center;
+    justify-content: left;
+    margin-left: 25%;
 }
 
 .sidebar {
     position: fixed;
-    width: 120px;
+    width: 170px;
 }
 
 #right {
-    width: 300px;
+    width: 400px;
     right: 0;
 }
 
 table {
-    margin: 0 auto;
+    margin: 0;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
-th {
+table th {
+    padding-left: 0;
     padding-right: 0.4rem;
+    width: 50px;
+}
+
+div#right table {
+    margin: 0 0 0 1.4em;
+}
+
+div#right table tr th {
+    border: 1px solid;
+    width: 30px;
+    text-align: center;
+    padding-right: 0;
 }
 
 td {
     border: 1px solid;
     padding: 0.4em 0.4rem;
+    width: 80px;
+    overflow: hidden;
+    white-space:  nowrap;
 }
 caption {
     font-size: 1.5em;
 }
-
 label {
     display: flex;
 }
 
-.imm {
-    display: inline-block;
+div.selector label {
+    justify-content: center;
+}
+
+td.insradio {
+    width: 20px;
+}
+
+td.insradio label {
+    display: table-cell;
+}
+
+form[name="radios"] {
+    padding-bottom: 0.9em;
+    margin-left: 0.7em;
 }
 
 .selector {
@@ -52,7 +82,6 @@ label {
 #rmdiv {
     display: none;
 }
-
 .immselector {
     width: 5em;
 }
@@ -60,11 +89,9 @@ label {
 .bin {
     display: table-cell;
 }
-
 .hex {
     display: none;
 }
-
 .dec {
     display: none;
 }

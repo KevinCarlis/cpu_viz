@@ -1,25 +1,33 @@
+function setInsBtn() {
+    const insBtn =  document.getElementById("ins0");
+    insBtn.checked= true;
+}
+setInsBtn();
+
 var rnel = document.getElementById("ins");
 rnel.addEventListener("change", function() {
     document.querySelector("#rmdiv").style.display = "none";
     document.getElementById("rnlabel").innerHTML = "Operand1";
-    if (this.value !== "move") {
+    if (this.value !== "MOV" && this.value !== "CMP") {
         document.querySelector("#rmdiv").style.display = "inline-block";
         document.getElementById("rnlabel").innerHTML = "Operand2";
+    }
+    if (this.value === "CMP") {
+        document.querySelector("#updatediv").style.display = "none";
+    } else {
+        document.querySelector("#updatediv").style.display = "inline-block";
     }
 });
 
 var immel = document.getElementById("rn");
 immel.addEventListener("change", function() {
     document.querySelector("#immdiv").style.display = "inline-block";
-    document.querySelector("#immdivs").style.display = "inline-block";
+    document.querySelector("#immsdiv").style.display = "inline-block";
     if (this.value !== "immediate") {
         document.querySelector("#immdiv").style.display = "none";
-        document.querySelector("#immdivs").style.display = "none";
+        document.querySelector("#immsdiv").style.display = "none";
     }
 });
-
-//$(document).ready(function(){
-//    $(#hex
 
 var radios = document.forms["radios"].elements["regbutt"];
 for(var i = 0, max = radios.length; i < max; i++) {

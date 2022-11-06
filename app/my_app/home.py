@@ -12,7 +12,7 @@ def home():
     return render_template(
         'home/home.html',
         names=registers.get_names(),
-        pairs=registers(),
+        pairs=session.get('registers', None),
         instructions=instructions()
     )
 
@@ -25,5 +25,6 @@ def result():
         return render_template(
             'home/home.html',
             names=registers.get_names(),
-            pairs=pairs
+            pairs=pairs,
+            instructions=instructions()
         )
