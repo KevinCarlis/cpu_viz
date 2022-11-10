@@ -9,6 +9,12 @@ h1, table {
     display: flex;
     justify-content: left;
     margin-left: 25%;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.selector {
+    display: inline-block;
+    padding-left: 0.4em;
 }
 
 .sidebar {
@@ -75,10 +81,6 @@ form[name="radios"] {
     margin-left: 0.7em;
 }
 
-.selector {
-    display: inline-block;
-    margin: 0.4em 1em 3em 1em;
-}
 #rmdiv {
     display: none;
 }
