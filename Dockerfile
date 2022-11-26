@@ -9,6 +9,7 @@ ENV FLASK_ENV=development
 
 RUN apt-get update -y
 RUN apt-get install -y python3-pip
+RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN make
 
 EXPOSE 5000

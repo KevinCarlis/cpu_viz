@@ -1,1 +1,1 @@
-ins='ADD', cpsr='AL', upcpsr='Up', rd='R0', rm='R0', rn='immediate', immbits='0', immshift='0'
+ins='MOV', cpsr='AL', rd='R0', rm='R0', rn='immediate', immbits='0', immshift='0'

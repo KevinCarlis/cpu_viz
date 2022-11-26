@@ -45,16 +45,13 @@ class Registers:
     names = [
             'R0', 'R1', 'R2', 'R3', 'R4', 'R5', 'R6',
             'R7', 'R8', 'R9', 'R10', 'R11', 'R12',
-            'SP', 'LR', 'PC', 'CPSR'
+            'SP', 'LR', 'PC CPSR'
             ]
 
     def __init__(self):
         self.registers = []
         for name in self.get_names():
-            if name in ['PC', 'CPSR']:
-                self.registers.append(Register(name, 4))
-            else:
-                self.registers.append(Register(name))
+            self.registers.append(Register(name))
         self._strings = self.format()
 
     def __len__(self):

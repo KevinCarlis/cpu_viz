@@ -1,0 +1,3 @@
+0 0 0 0  0 0  0 0| 0 0  0 0 0 0  0 0 |0 0   0 0 0 0   0 0
+N Z C V  S I    opcode       rn        rd       imm  imms
+   CPSR                                          rm
