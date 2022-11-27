@@ -21,7 +21,7 @@
                     <option value="ADD">ADD</option>
                     <option value="ADC">ADC</option>
                     <option value="SUB">SUB</option>
-                    <option value="SBC">SUB</option>
+                    <option value="SBC">SBC</option>
                     <option value="MUL">MUL</option>
                     <option value="DIV">DIV</option>
                     <option value="AND">AND</option>
@@ -62,26 +62,65 @@
             <div class="selector" id="rddiv">
                 <label for="rd" class="rd">Destination</label>
                 <select name="rd" class="rd" id="rd">
-                    {% for name in names %}
-                        <option value={{ name }}>{{ name }}</option>
-                    {% endfor %}
+                    <option value='R0'>R0</option>
+                    <option value='R1'>R1</option>
+                    <option value='R2'>R2</option>
+                    <option value='R3'>R3</option>
+                    <option value='R4'>R4</option>
+                    <option value='R5'>R5</option>
+                    <option value='R6'>R6</option>
+                    <option value='R7'>R7</option>
+                    <option value='R8'>R8</option>
+                    <option value='R9'>R9</option>
+                    <option value='R10'>R10</option>
+                    <option value='R11'>R11</option>
+                    <option value='R12'>R12</option>
+                    <option value='SP'>SP</option>
+                    <option value='LR'>LR</option>
+                    <option value='PC_CPSR'>PC_CPSR</option>
                 </select>
             </div>
             <div class="selector" id="rmdiv">
                 <label for="rm" class="rm">Operand1</label>
                 <select name="rm" class="rm" id="rm">
-                    {% for name in names %}
-                        <option value={{ name }}>{{ name }}</option>
-                    {% endfor %}
+                    <option value='R0'>R0</option>
+                    <option value='R1'>R1</option>
+                    <option value='R2'>R2</option>
+                    <option value='R3'>R3</option>
+                    <option value='R4'>R4</option>
+                    <option value='R5'>R5</option>
+                    <option value='R6'>R6</option>
+                    <option value='R7'>R7</option>
+                    <option value='R8'>R8</option>
+                    <option value='R9'>R9</option>
+                    <option value='R10'>R10</option>
+                    <option value='R11'>R11</option>
+                    <option value='R12'>R12</option>
+                    <option value='SP'>SP</option>
+                    <option value='LR'>LR</option>
+                    <option value='PC_CPSR'>PC_CPSR</option>
                 </select>
             </div>
             <div class="selector" id="rndiv">
                 <label for="rn" id="rnlabel">Operand1</label>
                 <select name="rn" id="rn">
                     <option value="immediate">Immediate</option>
-                        {% for name in names %}
-                    <option value={{ name }}>{{ name }}</option>
-                    {% endfor %}
+                    <option value='R0'>R0</option>
+                    <option value='R1'>R1</option>
+                    <option value='R2'>R2</option>
+                    <option value='R3'>R3</option>
+                    <option value='R4'>R4</option>
+                    <option value='R5'>R5</option>
+                    <option value='R6'>R6</option>
+                    <option value='R7'>R7</option>
+                    <option value='R8'>R8</option>
+                    <option value='R9'>R9</option>
+                    <option value='R10'>R10</option>
+                    <option value='R11'>R11</option>
+                    <option value='R12'>R12</option>
+                    <option value='SP'>SP</option>
+                    <option value='LR'>LR</option>
+                    <option value='PC_CPSR'>PC_CPSR</option>
                 </select>
             </div>
             <div class="selector" id="immdiv">
@@ -95,7 +134,31 @@
                 id="immshift" class="immselector" value="0">
             </div>
             <div class="selector">
-                <input type="submit" value="Encode">
+                <input type="submit" value="Encode" name="encode">
+            </div>
+            <div class="sidebar" id="right">
+                 <table>
+                     <caption>Instructions</caption>
+			        <form id = "insreg">
+                    {% for row in instructions %}
+                        <tr>
+                            <td class="insradio">
+                            <label>
+                            <input type="radio" name="inscheck" 
+                            value={{row[0]}} id={{ "ins" ~ row[0]}}>
+                            </label>
+                            </td>
+                        <th>{{ row[0] }}</th>
+                        {% for text in row[1:] %}
+                            <td>{{ text }}</td>
+                        {% endfor %}
+                        </tr>
+                    {% endfor %}
+			        </form>
+                </table>
+                <div class="selector" style="display:flex; justify-content:center;">
+                    <input type="submit" value="Run" name="run">
+                </div>
             </div>
         </form>
     </div>
@@ -131,29 +194,6 @@
         </table>
     </div>
 
-
-    <div class="sidebar" id="right">
-        <table>
-            <caption>Instructions</caption>
-            {% for row in instructions %}
-                <tr>
-                    <td class="insradio">
-                        <label>
-                        <input type="radio" name="inscheck" 
-                        value={{row[0]}} id={{ "ins" ~ row[0]}}>
-                        </label>
-                    </td>
-                    <th>{{ row[0] }}</th>
-                    {% for text in row[1:] %}
-                        <td>{{ text }}</td>
-                    {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
-        <div class="selector" style="display:flex; justify-content:center;">
-            <input type="submit" value="Run">
-        </div>
-    </div>
 
     <script src="{{ url_for('static', filename='iselect.js') }}"></script>
 {% endblock %}

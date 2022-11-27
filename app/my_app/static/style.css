@@ -28,6 +28,7 @@ h1, table {
 #right {
     width: 400px;
     right: 0;
+    padding-top: 20px;
 }
 
 table {
