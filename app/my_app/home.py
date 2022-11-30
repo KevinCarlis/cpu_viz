@@ -1,32 +1,35 @@
-from flask import Blueprint, render_template, request, session
-from my_app import parts, cpu
+from flask import Blueprint, render_template, request
+from my_app import cpu
 
 
 bp = Blueprint("home", __name__)
 p = cpu.CPU()
-r = parts.Registers()
-i = parts.Instructions()
 
-@bp.route('/')
-def home():
+
+@bp.get('/')
+def home_get():
     return render_template(
         'home/home.html',
-        pairs=r.registers(),
-        instructions=i.instructions()
+        pairs=p.registers(),
+        instructions=p.instructions(),
+        checked=0
     )
 
 
-@bp.route('/', methods=['POST'])
-def result():
-    if request.method == 'POST':
-        if 'encode' in request.form:
-            file1 = open("session.txt", "w")
-            file1.write(', '.join(['{}={!r}'.format(k,v) for k,v in request.form.items()]))
-            file1.write('\n')
-            file1.close()
-        
-        return render_template(
-            'home/home.html',
-            pairs=r.registers(),
-            instructions=i.instructions()
-        )
+@bp.post('/')
+def home_put():
+    if 'encode' in request.form:
+        """file1 = open("session.txt", "w")
+        file1.write(', '.join(['{}={!r}'.format(k, v) for k, v
+                    in request.form.items()]))
+        file1.write('\n')
+        file1.close()"""
+        p.encode(**request.form)
+    if 'run' in request.form:
+        p.run(**request.form)
+    return render_template(
+        'home/home.html',
+        pairs=p.registers(),
+        instructions=p.instructions(),
+        checked=int(request.form['inscheck'])
+    )

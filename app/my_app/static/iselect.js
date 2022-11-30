@@ -1,9 +1,9 @@
-function setInsBtn() {
+/*function setInsBtn() {
     const insBtn =  document.getElementById("ins0");
     insBtn.checked= true;
 }
 setInsBtn();
-
+*/
 var rnel = document.getElementById("ins");
 rnel.addEventListener("change", function() {
     document.querySelector("#rmdiv").style.display = "none";

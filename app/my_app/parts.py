@@ -8,21 +8,21 @@ except ImportError as err:
 
 
 class REG(Enum):
-    R0  = 0 
-    R1  = 1
-    R2  = 2
-    R3  = 3
-    R4  = 4
-    R5  = 5
-    R6  = 6
-    R7  = 7
-    R8  = 8
-    R9  = 9
+    R0 = 0
+    R1 = 1
+    R2 = 2
+    R3 = 3
+    R4 = 4
+    R5 = 5
+    R6 = 6
+    R7 = 7
+    R8 = 8
+    R9 = 9
     R10 = 10
     R11 = 11
     R12 = 12
-    SP  = 13
-    LR  = 14
+    SP = 13
+    LR = 14
     PC_CPSR = 15
 
     def __str__(self):
@@ -73,7 +73,6 @@ class INS(Enum):
         return bin(self.value)[2:].zfill(4)
 
 
-
 class Register:
     def __init__(self, name, size=8, value=Bits(0)):
         self.name = name
@@ -94,9 +93,7 @@ class Register:
         return int(self.value) - (2**self.size)
 
     def hex(self):
-        ret = "".join([
-            byte[:2] for byte in str(bytes(self.value)).split('\\x')[1:]
-            ]).zfill(self.size//4)
+        ret = (hex(self.value)).split('x')[1].zfill(self.size//4)
         if (self.name == 'PC_CPSR'):
             ret = ret[:-1] + '|' + ret[-1:]
         return ret
@@ -110,17 +107,13 @@ class Register:
 
 class Registers:
     def __init__(self, reg_size=8):
-        self._registers = []
+        self.registers = []
         for name in REG._member_names_:
-            self._registers.append(Register(name, size=reg_size))
-        self._strings = self.format()
-
-    def __len__(self):
-        return len(self.registers)
+            self.registers.append(Register(name, size=reg_size))
 
     def __call__(self):
-        return self._strings
-    
+        return self.format()
+
     def __getitem__(self, key):
         return self.registers[key]
 
@@ -131,51 +124,49 @@ class Registers:
         return [reg.format() for reg in self.registers]
 
     @property
-    def registers(self):
-        return self._registers
+    def cpsr(self):
+        return self.registers[REG.PC_CPSR.value]
 
-    @registers.setter
-    def registers(self, value):
-        self._registers = value
-        self.N = str(self._registers[REG["PC_CPSR"]])[4]
-        self.Z = str(self._registers[REG["PC_CPSR"]])[5]
-        self.C = str(self._registers[REG["PC_CPSR"]])[6]
-        self.V = str(self._registers[REG["PC_CPSR"]])[7]
-        self.PC = str(self._registers[REG["PC_CPSR"]])[:4]
 
 class Instruction:
-    def __init__(
-            self, ins='MOV', cpsr='AL', upcpsr=None,
-            rd='R0', rm='R0', rn='R0',
-            immbits=None, immshift=None):
-        self.cpsr = CPSR[cpsr]
-        self.s = (upcpsr == "Up")
-        if (rn == "Immediate"):
-            self.i = True
-            self.rn = "Immediate"
-        else:
-            self.i = False
-            self.rn = REG[rn]
-        self.ins = INS[ins]
-        self.rd = REG[rd]
-        self.rm = REG[rm]
-        self.immbits = immbits
-        self.immshift = immshift
+    def __init__(self, **kwargs):
+        self.decode(**kwargs)
 
     def encode(self):
         bits = str(self.cpsr)
         bits += '1' if self.s else '0'
         bits += '1' if self.i else '0'
         bits += str(self.ins)
-        bits += str(self.rd) 
+        bits += str(self.rd)
         bits += str(self.rm)
         if not self.i:
             bits += str(self.rn) + "00"
         else:
-            bits += bin(self.immbits)[2:].zfill(4) + bin(self.immshift)[2:].zfill(4)
+            bits += bin(self.immbits)[2:].zfill(4)
+            bits += bin(self.immshift)[2:].zfill(2)
         return bits
 
-    def decode(self, ins):
+    def decode(
+            self, ins='MOV', cpsr='AL', upcpsr=None,
+            rd='R0', rm='R0', rn='R0',
+            immbits=None, immshift=None, **kwargs):
+        self.cpsr = CPSR[cpsr]
+        self.s = (upcpsr == "Up")
+        if (rn == "immediate"):
+            self.i = True
+            self.rn = "immediate"
+            self.immbits = int(immbits)
+            self.immshift = int(immshift)
+        else:
+            self.i = False
+            self.rn = REG[rn]
+            self.immbits = immbits
+            self.immshift = immshift
+        self.ins = INS[ins]
+        self.rd = REG[rd]
+        self.rm = REG[rm]
+
+    def decode_str(self, ins):
         bits = list(Bits(ins))
         bits = ([0] * (24 - len(bits))) + bits
         self.cpsr = CPSR(bits[0]*8 + bits[1]*4 + bits[2]*2 + bits[3])
@@ -189,8 +180,10 @@ class Instruction:
             self.immbits = None
             self.immshift = None
         else:
-            self.rn = 'Immediate'
-            self.immbits = Bits.from_binary('0b' + "".join([str(i) for i in bits[18:22]]))
+            self.rn = 'immediate'
+            self.immbits = Bits.from_binary(
+                '0b' + "".join([str(i) for i in bits[18:22]])
+            )
             self.immshift = Bits(bits[22]*2 + bits[23])
 
 
@@ -198,7 +191,7 @@ class Instructions:
     def __init__(self, rows=16, size=3):
         self.instructions = []
         for i in range(rows):
-            self.instructions.append([i,Instruction()])
+            self.instructions.append([i, Instruction()])
 
     def __call__(self):
         ret = []
@@ -214,9 +207,3 @@ class Instructions:
 
     def __getitem__(self, key):
         return self.instructions[key]
-
-
-if __name__ == "__main__":
-    i = Registers()
-    r = REG.R0
-    print(r)
