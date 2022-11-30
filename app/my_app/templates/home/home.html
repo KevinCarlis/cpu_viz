@@ -130,7 +130,7 @@
             </div>
             <div class="selector" id="immsdiv">
                 <label for="immshift">Left Shift</label>
-                <input type="number" min="0" max="4" name="immshift"
+                <input type="number" min="0" max="3" name="immshift"
                 id="immshift" class="immselector" value="0">
             </div>
             <div class="selector">
@@ -145,7 +145,8 @@
                             <td class="insradio">
                             <label>
                             <input type="radio" name="inscheck" 
-                            value={{row[0]}} id={{ "ins" ~ row[0]}}>
+                                value={{row[0]}} id={{ "ins" ~ row[0]}}
+                                {{ "checked" if checked == row[0] }}>
                             </label>
                             </td>
                         <th>{{ row[0] }}</th>
